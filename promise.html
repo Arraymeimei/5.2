@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+
+        /*1*/
+
+//        var obj=new Promise(function (reslove) {
+//            setTimeout(function () {
+//                alert(1)
+//                reslove("执行完毕");//传入什么显示什么
+//            },3000)
+//        })
+//        obj.then(function (e) {
+//            console.log(e)
+//        })
+        /*
+        * 1.指定要执行的函数
+        * 2.在执行完毕的时候要调用reslove通知程序，代码执行完毕
+        * 3.then来执行最后的步骤
+        * */
+
+//
+//        function one() {
+//            var promise=new Promise(function (reslove) {
+//                setTimeout(function () {
+//                    console.log(1)
+//                    reslove("第一个执行完毕")
+//                },3000)
+//            })
+//            return promise;  //链式调用
+//        }
+//        function two() {
+//            var promise=new Promise(function (reslove) {
+//                setTimeout(function () {
+//                    console.log(2)
+//                    reslove("第二个执行完毕")
+//                },3000)
+//            })
+//            return promise;
+//        }
+//        function three() {
+//            var promise=new Promise(function (reslove) {
+//                setTimeout(function () {
+//                    console.log(3)
+//                    reslove("第三个执行完毕")
+//                },3000)
+//            })
+//            return promise;
+//        }
+//
+//        one().then(function (e) {
+//            console.log(e)
+//            return two()
+//        }).then(function (e) {
+//            console.log(e)
+//            return three()
+//        }).then(function (e) {
+//            console.log(e)
+//        })
+//
+//        console.dir(Promise)
+//
+//        var promise=Promise;
+//        setTimeout(function () {
+//            alert(1);
+//            //本身去调用
+//            promise.resolve("执行完毕").then(function (e) {
+//                console.log(e)
+//            })
+//        },3000)
+//
+//      $http是特殊的$q
+
+
+
+    function defer() {
+        return promise()
+    }
+    function promise() {
+        this.resolveArr=[];
+        this.done.Arr=[];
+        this.primise=this;
+    }
+
+     promise.prototype={
+        resolve:function (arge) {
+            this.resolveArr.push(Promise.resolve(arge));
+            this.resolveArr[0].then((e)=>{
+                    this.resolveArr.shift();
+                    this.doneArr[0](e);
+                    this.doneArr.shift();
+                });
+
+        },
+         then:function (callback) {
+             this.doneArr.push(callback);
+             return this;
+         }
+     }
+        var obj=defer()
+        function a() {
+            setTimeout(function () {
+                obj.resolve("one")
+            },2000)
+        }
+        function b() {
+            setTimeout(function () {
+                obj.resolve("two")
+            },2000)
+        }
+        function c() {
+            setTimeout(function () {
+                obj.resolve("three")
+            },2000)
+        }
+    </script>
+
+</head>
+<body>
+
+</body>
+</html>

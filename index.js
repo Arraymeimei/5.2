@@ -6,28 +6,28 @@ app.use(express.static(path.join(__dirname,"static")));
 
 app.get("/",function(req,res){
   res.sendFile(path.join(__dirname,"static/tpl/index.html"));
-})
+});
 app.get("/tpl/:name",function(req,res){
     res.sendFile(path.join(__dirname,"static/tpl/"+req.params.name));
-})
+});
 
 app.get("/select",function(req,res){
   mysql.query("select * from stuinfo",function(error,result){
         res.send(JSON.stringify(result));
   })
-})
+});
 app.get("/del",function(req,res){
     var id=req.query.id;
     mysql.query("delete from stuinfo where id="+id,function(){
         res.send("ok");
     })
-})
+});
 app.get("/edit",function(req,res){
     var id=req.query.id;
     mysql.query("select * from stuinfo where id="+id,function(error,result){
         res.send(JSON.stringify(result));
     })
-})
+});
 
 app.get("/editCon",function(req,res){
     var id=req.query.id;

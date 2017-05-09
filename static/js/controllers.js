@@ -13,9 +13,9 @@ angular.module("controllers",["services"])
                     if(e.data=="ok") {
                         $scope.data.splice(index, 1);
                     }
-                   })
+                   }
 
-               }
+               )}
 
            })
        }

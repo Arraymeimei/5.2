@@ -1,4 +1,4 @@
 angular.module("services",[])
-.factory("Stuinfo",function($http,$q){
-    return $http({url:"/select"});
-})
+    .factory("Stuinfo",function($http,$q){
+        return $http({url:"/select"});
+    })
